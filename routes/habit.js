@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
 
-const Habit = require("../src/middleware/models/Habit");
-const Progress = require("../src/middleware/models/Progress"); // Assuming you have a Progress model
+const Habit = require("../models/Habit");
+const Progress = require("../models/Progress"); // Assuming you have a Progress model
 
-const { verifyToken } = require("../src/middleware/auth");
+const { verifyToken } = require("../middleware/auth");
 
 //@route POST api/habits/
 //@desc create habit

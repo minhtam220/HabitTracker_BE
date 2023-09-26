@@ -1,5 +1,5 @@
 // Load environment variables from .env file
-require("./src/middleware/node_modules/dotenv/lib/main").config();
+require("dotenv").config();
 
 // Import the authentication router module from the 'auth' file in the 'routes' directory.
 const authRouter = require("./routes/auth");
@@ -44,5 +44,5 @@ app.use("/api/auth", authRouter);
 app.use("/api/habits", habitRouter);
 
 // Start the server
-const PORT = 4000;
+const PORT = 2000;
 app.listen(PORT, () => console.log(`Server is started on port ${PORT}`));

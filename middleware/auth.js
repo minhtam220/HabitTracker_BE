@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 
-const { checkWithBlacklist } = require("../../routes/blacklist");
+const { checkWithBlacklist } = require("../routes/blacklist");
 
 const verifyToken = (req, res, next) => {
   const authHeader = req.header("Authorization");

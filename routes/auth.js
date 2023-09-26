@@ -7,12 +7,12 @@ const genSaltPromise = util.promisify(bcrypt.genSalt);
 const hashPromise = util.promisify(bcrypt.hash);
 
 const jwt = require("jsonwebtoken");
-const User = require("../src/middleware/models/User");
+const User = require("../models/User");
 
 const { addToBlacklist } = require("./blacklist"); // Assuming you have a blacklist utility
 
 // Load environment variables from .env file
-require("../src/middleware/node_modules/dotenv/lib/main").config();
+require("dotenv").config();
 
 //@route POST api/auth/register
 //@desc register user
