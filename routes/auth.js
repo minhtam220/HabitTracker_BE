@@ -68,8 +68,10 @@ router.post("/register", async (req, res) => {
     return res.json({
       success: true,
       message: "User created successfully",
-      data: newUser,
-      accessToken,
+      data: {
+        user: newUser,
+        accessToken,
+      },
     });
   } catch (error) {
     return res
@@ -137,8 +139,10 @@ router.post("/login", async (req, res) => {
     return res.json({
       success: true,
       message: "User logged in successfully",
-      data: user,
-      accessToken,
+      data: {
+        user: { _id: user._id, username: user.username, email: user.email },
+        accessToken,
+      },
     });
   } catch (error) {
     return res
