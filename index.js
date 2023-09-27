@@ -45,10 +45,10 @@ app.use((req, res, next) => {
 app.use(express.json());
 
 // Define routes for authentication
-app.use("/auth", authRouter);
+app.use("/api/auth", authRouter);
 
 // Define routes for habit
-app.use("/habits", habitRouter);
+app.use("/api/habits", habitRouter);
 
 // Start the server
 const PORT = 2000;
