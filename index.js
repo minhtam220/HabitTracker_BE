@@ -34,14 +34,21 @@ connectDB();
 const express = require("express");
 const app = express();
 
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  next();
+});
+
 // Parse incoming JSON data
 app.use(express.json());
 
 // Define routes for authentication
-app.use("/api/auth", authRouter);
+app.use("/auth", authRouter);
 
 // Define routes for habit
-app.use("/api/habits", habitRouter);
+app.use("/habits", habitRouter);
 
 // Start the server
 const PORT = 2000;
