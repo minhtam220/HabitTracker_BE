@@ -114,8 +114,8 @@ The Back End provides the API to manage users and tasks.
 
 ### Habit
 #### List all Habits
-- **Route:** `GET /habits/users/{userId}`
-- **Description:** List all habits belong to a user.
+- **Route:** `GET /habits`
+- **Description:** List all habits belong to the current user.
 - **Request Body:**
   ```json
 
