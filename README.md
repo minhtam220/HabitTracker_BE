@@ -80,9 +80,9 @@ The Back End provides the API to manage users and tasks.
     ```
 
 ### Habit
-#### Get a List of Habits
+#### List all Habits
 - **Route:** `GET /habits/users/{userId}`
-- **Description:** Get a list of habits belong to a user.
+- **Description:** List all habits belong to a user.
 - **Request Body:**
   ```json
 
@@ -121,7 +121,7 @@ The Back End provides the API to manage users and tasks.
     ```
 #### Delete a Habit
 - **Route:** `DELETE /habits/{id}`
-- **Description:** Delete a habit.
+- **Description:** Delete a habit
 - **Request Body:**
   ```json
 
@@ -134,10 +134,9 @@ The Back End provides the API to manage users and tasks.
     ```
     
 ### Progress
-
-#### Get a list of Progresses of a Habit
-- **Route:** `GET /habits/progresses/{habitId}`
-- **Description:** Get a list of progresses of a habit.
+#### View the Progress of a Habit
+- **Route:** `GET /habits/progresses/`
+- **Description:** View the progress of a habit
 - **Request Body:**
   ```json
 
@@ -149,23 +148,9 @@ The Back End provides the API to manage users and tasks.
 
     ```
     
-#### Create a New Progress of a Habit
-- **Route:** `POST /habits/progresses/`
-- **Description:** Create a new habit.
-- **Request Body:**
-  ```json
-
-  ```
-- **Response:**
-  - Status: 200 OK
-  - Body:
-    ```json
-
-    ```
-    
-#### Update a Progress
-- **Route:** `PUT /habits/progresses/{progressId}`
-- **Description:** Update a progress.
+#### Mark/Unmark the Completion of a Habit on a given Date
+- **Route:** `POST /habits/progresses/{date}`
+- **Description:** Mark or unmark the completion of a habit on a given date
 - **Request Body:**
   ```json
 
@@ -177,59 +162,8 @@ The Back End provides the API to manage users and tasks.
 
     ```
 
-### Goal
-#### List all Goals
-- **Route:** `GET /goals/users/{userId}`
-- **Description:** List all goals belong to a user.
-- **Request Body:**
-  ```json
 
-  ```
-- **Response:**
-  - Status: 200 OK
-  - Body:
-    ```json
 
-    ```
-#### Create a New Goal
-- **Route:** `POST /goals`
-- **Description:** Create a new goal.
-- **Request Body:**
-  ```json
-
-  ```
-- **Response:**
-  - Status: 200 OK
-  - Body:
-    ```json
-
-    ```
-#### Update a Goal
-- **Route:** `PUT /goals/{id}`
-- **Description:** Update a goal.
-- **Request Body:**
-  ```json
-
-  ```
-- **Response:**
-  - Status: 200 OK
-  - Body:
-    ```json
-
-    ```
-#### Delete a Goal
-- **Route:** `DELETE /goals/{id}`
-- **Description:** Delete a goal.
-- **Request Body:**
-  ```json
-
-  ```
-- **Response:**
-  - Status: 200 OK
-  - Body:
-    ```json
-
-    ```
 
 
 
