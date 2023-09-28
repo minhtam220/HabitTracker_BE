@@ -18,6 +18,27 @@ The Back End provides the API to manage users and tasks.
 - Express.js
 - Mongoose
 
+## Schemas
+
+### User: 
+- username
+- email
+- password
+
+### Habit
+- name
+- description
+- userId
+- goalValue
+- goalFrequency
+- reminderTime
+- completed
+
+### Completion
+- date
+- completed
+- habitId
+
 ## API Routes
 
 ### Server: https://habittracker-be.onrender.com/
@@ -28,7 +49,11 @@ The Back End provides the API to manage users and tasks.
 - **Description:** Register a new user.
 - **Request Body:**
   ```json
-
+  {
+  "username": "string",
+  "email": "string",
+  "password": "string"
+  }
   ```
 - **Response:**
   - Status: 200 OK
@@ -42,7 +67,10 @@ The Back End provides the API to manage users and tasks.
 - **Description:** Login a user.
 - **Request Body:**
   ```json
-
+  {
+  "email": "string",
+  "password": "string"
+  }
   ```
 - **Response:**
   - Status: 200 OK
@@ -70,6 +98,11 @@ The Back End provides the API to manage users and tasks.
 - **Description:** Update a user.
 - **Request Body:**
   ```json
+  {
+  "username": "string",
+  "email": "string",
+  "password": "string"
+  }
 
   ```
 - **Response:**
@@ -98,6 +131,15 @@ The Back End provides the API to manage users and tasks.
 - **Description:** Create a new habit.
 - **Request Body:**
   ```json
+  {
+  "name": "string",
+  "description": "string",
+  "goalValue": "number",
+  "goalFrequency": "number",
+  "reminderTime": "time",
+  "completed": "boolean",
+  "userId": "string",
+  }
 
   ```
 - **Response:**
@@ -111,7 +153,15 @@ The Back End provides the API to manage users and tasks.
 - **Description:** Update a habit.
 - **Request Body:**
   ```json
-
+  {
+  "name": "string",
+  "description": "string",
+  "goalValue": "number",
+  "goalFrequency": "number",
+  "reminderTime": "time",
+  "completed": "boolean",
+  "userId": "string",
+  }
   ```
 - **Response:**
   - Status: 200 OK
@@ -136,7 +186,7 @@ The Back End provides the API to manage users and tasks.
 ### Progress
 #### View the Progress of a Habit
 - **Route:** `GET /habits/progresses/`
-- **Description:** View the progress of a habit
+- **Description:** Get a list of completion dates of a habit
 - **Request Body:**
   ```json
 
@@ -148,21 +198,24 @@ The Back End provides the API to manage users and tasks.
 
     ```
     
-#### Mark/Unmark the Completion of a Habit on a given Date
-- **Route:** `POST /habits/progresses/{date}`
+#### Update the Progress of a Habit
+- **Route:** `POST /habits/progresses/{id}`
 - **Description:** Mark or unmark the completion of a habit on a given date
 - **Request Body:**
   ```json
-
+  {
+  "date": "string"
+  "completed": "boolean",
+  "habitId": "string"
+  }
   ```
 - **Response:**
   - Status: 200 OK
   - Body:
     ```json
+    
 
     ```
-
-
 
 
 
