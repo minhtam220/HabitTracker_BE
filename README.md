@@ -94,7 +94,7 @@ The Back End provides the API to manage users and tasks.
     
 ### User
 #### Update a User
-- **Route:** `PUT /users/{id}`
+- **Route:** `PUT /users/{userId}`
 - **Description:** Update a user.
 - **Request Body:**
   ```json
@@ -115,7 +115,7 @@ The Back End provides the API to manage users and tasks.
 ### Habit
 #### List all Habits
 - **Route:** `GET /habits`
-- **Description:** List all habits belong to the current user.
+- **Description:** List all habits belong to the current user
 - **Request Body:**
   ```json
 
@@ -128,7 +128,7 @@ The Back End provides the API to manage users and tasks.
     ```
 #### Create a New Habit
 - **Route:** `POST /habits`
-- **Description:** Create a new habit.
+- **Description:** Create a new habit for the current user
 - **Request Body:**
   ```json
   {
@@ -149,8 +149,8 @@ The Back End provides the API to manage users and tasks.
 
     ```
 #### Update a Habit
-- **Route:** `PUT /habits/{id}`
-- **Description:** Update a habit.
+- **Route:** `PUT /habits/{habitId}`
+- **Description:** Update a habit
 - **Request Body:**
   ```json
   {
@@ -170,7 +170,7 @@ The Back End provides the API to manage users and tasks.
 
     ```
 #### Delete a Habit
-- **Route:** `DELETE /habits/{id}`
+- **Route:** `DELETE /habits/{habitId}`
 - **Description:** Delete a habit
 - **Request Body:**
   ```json
@@ -185,7 +185,7 @@ The Back End provides the API to manage users and tasks.
     
 ### Progress
 #### View the Progress of a Habit
-- **Route:** `GET /habits/progresses/`
+- **Route:** `GET /habits/progress/`
 - **Description:** Get a list of completion dates of a habit
 - **Request Body:**
   ```json
