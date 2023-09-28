@@ -205,8 +205,7 @@ The Back End provides the API to manage users and tasks.
   ```json
   {
   "date": "string"
-  "completed": "boolean",
-  "habitId": "string"
+  "completed": "boolean"
   }
   ```
 - **Response:**
