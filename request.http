@@ -1,0 +1,69 @@
+### Register
+POST http://localhost:2000/api/auth/register
+Content-Type: application/json
+
+{
+  "username": "tam",
+  "email":"tam@gmail.com",
+  "password": "tam"
+}
+
+### Login
+POST http://localhost:2000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "tam@gmail.com",
+  "password": "tam"
+}
+
+### Get habits
+GET http://localhost:2000/api/habits
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTE2NDYwNDI3M2RlYzE1ODhhNjg0NTEiLCJpYXQiOjE2OTU5NTg2MjF9.FPB9cl77iPfQPoHeAxwPHiz7L1mI5-29sUpyJalzicw
+
+### Create habit
+POST http://localhost:2000/api/habits
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTE2NDYwNDI3M2RlYzE1ODhhNjg0NTEiLCJpYXQiOjE2OTU5NTg2MjF9.FPB9cl77iPfQPoHeAxwPHiz7L1mI5-29sUpyJalzicw
+
+{
+  "name": "drink peach juice",
+  "description": "drink every day",
+  "goalValue": 21,
+  "goalFrequency": 2,
+  "reminderTime": "10 AM",
+  "completed": false
+}
+
+### Update habit
+PUT http://localhost:2000/api/habits/6516484c273dec1588a68456
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTE2NDYwNDI3M2RlYzE1ODhhNjg0NTEiLCJpYXQiOjE2OTU5NTg2MjF9.FPB9cl77iPfQPoHeAxwPHiz7L1mI5-29sUpyJalzicw
+
+{
+  "name": "drink water",
+  "description": "drink every day",
+  "goalValue": 21,
+  "goalFrequency": 2,
+  "reminderTime": "10 AM",
+  "completed": false
+}
+
+### Delete habit
+DELETE http://localhost:2000/api/habits/6516484c273dec1588a68456
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTE2NDYwNDI3M2RlYzE1ODhhNjg0NTEiLCJpYXQiOjE2OTU5NTg2MjF9.FPB9cl77iPfQPoHeAxwPHiz7L1mI5-29sUpyJalzicw
+
+### View progress
+GET http://localhost:2000/api/habits/6516484c273dec1588a68456/progress
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTE2NDYwNDI3M2RlYzE1ODhhNjg0NTEiLCJpYXQiOjE2OTU5NTg2MjF9.FPB9cl77iPfQPoHeAxwPHiz7L1mI5-29sUpyJalzicw
+
+### Update progress
+PUT http://localhost:2000/api/habits/6516484c273dec1588a68456/progress
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTE2NDYwNDI3M2RlYzE1ODhhNjg0NTEiLCJpYXQiOjE2OTU5NTg2MjF9.FPB9cl77iPfQPoHeAxwPHiz7L1mI5-29sUpyJalzicw
+
+{
+  "date": "2023-09-22"
+}

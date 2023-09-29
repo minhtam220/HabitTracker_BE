@@ -9,27 +9,29 @@ const HabitSchema = new Schema({
   description: {
     type: String,
   },
-  goal_type: {
-    type: String,
-    enum: ["Daily", "Weekly", "Monthly"],
-    required: true,
-  },
-  goal_value: {
+  goalValue: {
     type: Number,
     required: true,
   },
-  reminder_time: {
+  goalFrequency: {
+    type: Number,
+    required: true,
+  },
+  reminderTime: {
     type: String,
   },
-  created_at: {
+  completed: {
+    type: Boolean,
+  },
+  createdAt: {
     type: Date,
     default: Date.now,
   },
-  updated_at: {
+  updatedAt: {
     type: Date,
     default: Date.now,
   },
-  user_id: {
+  userId: {
     type: Schema.Types.ObjectId,
     ref: "users",
     required: true,

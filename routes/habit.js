@@ -2,15 +2,37 @@ const express = require("express");
 const router = express.Router();
 
 const Habit = require("../models/Habit");
-const Progress = require("../models/Progress"); // Assuming you have a Progress model
+const Completion = require("../models/Completion");
 
 const { verifyToken } = require("../middleware/auth");
 
+//@route GET api/habits/
+//@desc list all habits belong to the current user
+//access private
+router.get("/", verifyToken, async (req, res) => {
+  const { userId } = req.body;
+
+  try {
+    const habits = await Habit.find({ userId });
+
+    return res.json({
+      success: true,
+      message: "Habits retrieved successfully",
+      data: habits,
+    });
+  } catch (error) {
+    console.log(error);
+    return res
+      .status(500)
+      .json({ success: false, message: "Internal server error" });
+  }
+});
+
 //@route POST api/habits/
-//@desc create habit
+//@desc create a new habit
 //access private
 router.post("/", verifyToken, async (req, res) => {
-  const { user_id, name, description, goal_type, goal_value, reminder_time } =
+  const { name, description, goalValue, goalFrequency, reminderTime, userId } =
     req.body;
 
   // Simple validation
@@ -19,12 +41,13 @@ router.post("/", verifyToken, async (req, res) => {
 
   try {
     const newHabit = new Habit({
-      user_id,
       name,
       description,
-      goal_type,
-      goal_value,
-      reminder_time,
+      goalValue,
+      goalFrequency,
+      reminderTime,
+      completed: false,
+      userId,
     });
 
     await newHabit.save();
@@ -42,34 +65,19 @@ router.post("/", verifyToken, async (req, res) => {
   }
 });
 
-//@route GET api/habits/
-//@desc get habits
-//access private
-router.get("/", verifyToken, async (req, res) => {
-  const { user_id } = req.body;
-
-  try {
-    const habits = await Habit.find({ user_id });
-
-    return res.json({
-      success: true,
-      message: "Habits retrieved successfully",
-      data: habits,
-    });
-  } catch (error) {
-    console.log(error);
-    return res
-      .status(500)
-      .json({ success: false, message: "Internal server error" });
-  }
-});
-
 //@route PUT api/habits/:id
-//@desc update habit
+//@desc update a habit
 //access private
 router.put("/:id", verifyToken, async (req, res) => {
-  const { user_id, name, description, goal_type, goal_value, reminder_time } =
-    req.body;
+  const {
+    name,
+    description,
+    goalValue,
+    goalFrequency,
+    reminderTime,
+    completed,
+    userId,
+  } = req.body;
 
   // Simple validation
   if (!name)
@@ -77,15 +85,16 @@ router.put("/:id", verifyToken, async (req, res) => {
 
   try {
     let updatedHabit = {
-      user_id,
       name,
-      description: description || "",
-      goal_type,
-      goal_value,
-      reminder_time,
+      description,
+      goalValue,
+      goalFrequency,
+      reminderTime,
+      completed,
+      userId,
     };
 
-    const habitUpdateCondition = { _id: req.params.id, user_id };
+    const habitUpdateCondition = { _id: req.params.id, userId };
 
     updatedHabit = await Habit.findOneAndUpdate(
       habitUpdateCondition,
@@ -112,74 +121,14 @@ router.put("/:id", verifyToken, async (req, res) => {
   }
 });
 
-// Get progress for a habit
-router.get("/:habitId/progress", async (req, res) => {
-  const { habitId } = req.params;
-
-  console.log("Get progress");
-
-  try {
-    // Check if there's already a progress entry for this habit and date
-    let progresses = await Progress.find({ habit_id: habitId });
-
-    return res.json({
-      success: true,
-      message: "Progresses retrieved successfully",
-      data: progresses,
-    });
-  } catch (error) {
-    console.error(error);
-    return res
-      .status(500)
-      .json({ success: false, message: "Internal server error" });
-  }
-});
-
-// Update progress for a habit on a specific day
-router.put("/:habitId/:date", async (req, res) => {
-  const { habitId, date } = req.params;
-  const { progressValue } = req.body;
-
-  console.log("Update progress");
-
-  try {
-    // Check if there's already a progress entry for this habit and date
-    let progress = await Progress.findOne({ habit_id: habitId, date });
-
-    if (!progress) {
-      // If not, create a new progress entry
-      progress = new Progress({
-        habit_id: habitId,
-        date,
-        progress_value: progressValue,
-      });
-    } else {
-      // If there's an existing entry, update it
-      progress.progress_value = progressValue;
-    }
-
-    await progress.save();
-
-    return res.json({
-      success: true,
-      message: "Progress updated successfully",
-    });
-  } catch (error) {
-    console.error(error);
-    return res
-      .status(500)
-      .json({ success: false, message: "Internal server error" });
-  }
-});
-
 //@route DELETE api/habits/:id
-//@desc delete habit
+//@desc delete a habit
 //access private
 router.delete("/:id", verifyToken, async (req, res) => {
-  const { user_id } = req.body;
+  const { userId } = req.body;
 
   try {
-    const habitDeleteCondition = { _id: req.params.id, user_id };
+    const habitDeleteCondition = { _id: req.params.id, userId };
 
     const deletedHabit = await Habit.findOneAndDelete(habitDeleteCondition);
 
@@ -196,6 +145,65 @@ router.delete("/:id", verifyToken, async (req, res) => {
     });
   } catch (error) {
     console.log(error);
+    return res
+      .status(500)
+      .json({ success: false, message: "Internal server error" });
+  }
+});
+
+// View progress of a habit
+router.get("/:habitId/progress", async (req, res) => {
+  const { habitId } = req.params;
+
+  console.log("Get progress");
+
+  try {
+    // Check if there's already a progress entry for this habit and date
+    let progress = await Completion.find({ habitId: habitId });
+
+    return res.json({
+      success: true,
+      message: "Progress retrieved successfully",
+      data: progress,
+    });
+  } catch (error) {
+    console.error(error);
+    return res
+      .status(500)
+      .json({ success: false, message: "Internal server error" });
+  }
+});
+
+// Update progress for a habit on a specific day
+router.put("/:habitId/progress", async (req, res) => {
+  const { habitId } = req.params;
+  const { date } = req.body;
+
+  try {
+    // Check if there's already a progress entry for this habit and date
+    let completion = await Completion.findOne({ habitId: habitId, date });
+
+    if (!completion) {
+      // If not, create a new entry
+      completion = new Completion({
+        date,
+        habitId,
+      });
+      await completion.save();
+    } else {
+      // If there's an existing entry, delete it
+      const deletedCompletion = await Completion.findOneAndDelete({
+        date,
+        habitId: habitId,
+      });
+    }
+
+    return res.json({
+      success: true,
+      message: "Progress updated successfully",
+    });
+  } catch (error) {
+    console.error(error);
     return res
       .status(500)
       .json({ success: false, message: "Internal server error" });

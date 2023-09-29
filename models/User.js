@@ -16,6 +16,7 @@ const UserSchema = new Schema({
   email: {
     type: String, // The data type for this field is a string.
     required: true, // This field is required (must have a value).
+    unique: true, // The values in this field must be unique in the collection.
   },
   // Define the 'password' field in the schema.
   password: {
