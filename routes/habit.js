@@ -18,7 +18,10 @@ router.get("/", verifyToken, async (req, res) => {
     return res.json({
       success: true,
       message: "Habits retrieved successfully",
-      data: habits,
+      data: {
+        habits: habits,
+        count: habits.length, // Add the count property
+      },
     });
   } catch (error) {
     console.log(error);

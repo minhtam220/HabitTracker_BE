@@ -121,7 +121,7 @@ router.post("/login", async (req, res) => {
 
     let passwordValid = await verifyPassword(password, user.password);
 
-    console.log("passwordValid: " + passwordValid);
+    //console.log("passwordValid: " + passwordValid);
 
     if (!passwordValid)
       return res
