@@ -202,6 +202,7 @@ This schema represents a result of a habit on a date.
 
 ## Sample Data
 [x] users: 1 record
+```json
 {
   "_id": {
     "$oid": "65164604273dec1588a68451"
@@ -214,8 +215,10 @@ This schema represents a result of a habit on a date.
   },
   "__v": 0
 }
+```
 
 [] setting: 1 record
+```json
 {
   "max_habits": 5,
   "analyse_duration": 7,
@@ -232,8 +235,10 @@ This schema represents a result of a habit on a date.
   "check_stage_check_page": `["track"]`,
   "user": "65164604273dec1588a68451" //replace with actual user_id
 }
+```
 
 [] cycles: 1 record
+```json
 {
   "start_date": "2023-10-01",
   "end_date": "2023-10-07",
@@ -241,18 +246,20 @@ This schema represents a result of a habit on a date.
   "analyse_result": "609f90f3f5fc66362eac73a2", //replace with actual prime habit_id
   "build_duration": 21,
   "check_result": "success",
-  "habits": `[
+  "habits": [
     "609f90f3f5fc66362eac73a3",//replace with actual habit_id
     "609f90f3f5fc66362eac73a4",//replace with actual habit_id
     "609f90f3f5fc66362eac73a5",//replace with actual habit_id
     "609f90f3f5fc66362eac73a4",//replace with actual habit_id
     "609f90f3f5fc66362eac73a5" //replace with actual habit_id
-  ]`,
+  ],
   "user": "65164604273dec1588a68451" //replace with actual user_id
 }
+```
 
 [] motivation: 5 records
-`[
+```json
+[
   {
     "_id": "1",
     "text": "Successful people are simply those with successful habits. – Brian Tracy"
@@ -273,7 +280,8 @@ This schema represents a result of a habit on a date.
     "_id": "5",
     "text": "The hard must become habit. The habit must become easy. The easy must become beautiful. – Doug Henning"
   }
-]`
+]
+```
 
 [] instruction: 6 records
 
