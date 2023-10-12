@@ -217,22 +217,22 @@ This schema represents a result of a habit on a date.
 }
 ```
 
-[] setting: 1 record
+[x] setting: 1 record
 ```json
 {
   "max_habits": 5,
   "analyse_duration": 7,
   "build_duration": 21,
   "check_duration": 7,
-  "analyse_stage_analyse_page": `["view", "create", "edit", "track"]`,
-  "analyse_stage_build_page": `[]`,
-  "analyse_stage_check_page": `["view"]`,
-  "build_stage_analyse_page": `["view"]`,
-  "build_stage_build_page": `["view", "track"]`,
-  "build_stage_check_page": `[]`,
-  "check_stage_analyse_page": `["view"]`,
-  "check_stage_build_page": `["view"]`,
-  "check_stage_check_page": `["track"]`,
+  "analyse_stage_analyse_page": ["view", "create", "edit", "track"]`,
+  "analyse_stage_build_page": []`,
+  "analyse_stage_check_page": `["view"],
+  "build_stage_analyse_page": ["view"],
+  "build_stage_build_page": ["view", "track"],
+  "build_stage_check_page": [],
+  "check_stage_analyse_page": ["view"],
+  "check_stage_build_page": ["view"],
+  "check_stage_check_page": ["track"],
   "user": "65164604273dec1588a68451" //replace with actual user_id
 }
 ```
@@ -257,37 +257,54 @@ This schema represents a result of a habit on a date.
 }
 ```
 
-[] motivation: 5 records
+[x] motivation: 5 records
 ```json
-[
-  {
-    "_id": "1",
-    "text": "Successful people are simply those with successful habits. – Brian Tracy"
-  },
-  {
-    "_id": "2",
-    "text": "We are what we repeatedly do. Excellence then, is not an act, but a habit. – Aristotle"
-  },
-  {
-    "_id": "3",
-    "text": "Watch your actions, they become your habits. Watch your habits, they become your character. – Vince Lombardi"
-  },
-  {
-    "_id": "4",
-    "text": "The successful person makes a habit of doing what the failing person doesn’t like to do. – Thomas Edison"
-  },
-  {
-    "_id": "5",
-    "text": "The hard must become habit. The habit must become easy. The easy must become beautiful. – Doug Henning"
-  }
-]
+db.quotes.insertMany([
+    { "text": "Successful people are simply those with successful habits. – Brian Tracy" },
+    { "text": "We are what we repeatedly do. Excellence then, is not an act, but a habit. – Aristotle" },
+    { "text": "Watch your actions, they become your habits. Watch your habits, they become your character. – Vince Lombardi" },
+    { "text": "The successful person makes a habit of doing what the failing person doesn’t like to do. – Thomas Edison" },
+    { "text": "The hard must become habit. The habit must become easy. The easy must become beautiful. – Doug Henning" }
+]);
 ```
 
-[] instruction: 6 records
+```json
+
+```
+
+[] instructions: 6 records
 
 
 [] habits: 5 records
-
+```json
+db.habits.insertMany([
+  {
+    "description": "Exercise for 30 minutes daily",
+    "type": "good",
+    "results": []
+  },
+  {
+    "description": "Read a book for 20 minutes before bedtime",
+    "type": "good",
+    "results": []
+  },
+  {
+    "description": "Limit screen time to 2 hours per day",
+    "type": "good",
+    "results": []
+  },
+  {
+    "description": "Avoid sugary snacks and drinks",
+    "type": "good",
+    "results": []
+  },
+  {
+    "description": "Smoking cessation program",
+    "type": "bad",
+    "results": []
+  }
+]);
+```
 
 [] results: 35 records
 
