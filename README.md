@@ -326,7 +326,7 @@ db.quotes.insertMany([
 ])
 ```
 
-[] instructions: 6 records
+[x] instructions: 6 records
 ```json
 db.collectionName.insertMany([
   {
@@ -426,7 +426,7 @@ db.collectionName.insertMany([
 ])
 ```
 
-[] results: 35 records
+[x] results: 35 records
 ```json
 db.results.insertMany(
 [{
