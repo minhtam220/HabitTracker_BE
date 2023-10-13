@@ -923,13 +923,11 @@ db.results.insertMany(
 ```
 
 ## API Routes
-
-### Server: https://habittracker-be.onrender.com/
+- Server: https://habittracker-be.onrender.com/
 
 ### Authentication
 
-#### Register a New User
-
+[] Register a New User
 - **Route:** `POST /auth/register`
 - **Description:** Register a new user.
 - **Request Body:**
@@ -944,10 +942,9 @@ db.results.insertMany(
   - Status: 200 OK
   - Body:
     ```json
-
     ```
 
-#### Login a User
+[] Login a User
 - **Route:** `POST /auth/login`
 - **Description:** Login a user.
 - **Request Body:**
@@ -961,31 +958,25 @@ db.results.insertMany(
   - Status: 200 OK
   - Body:
     ```json
-
     ```
 
-#### Logout a User
+[] Logout a User
 - **Route:** `POST /auth/logout`
 - **Description:** Logout a user.
 - **Request Body:**
   ```json
-
   ```
-
 - **Response:**
   - Status: 200 OK
   - Body:
-
     ```json
-
     ```
 
 ### User
-#### Update a User
+[] Update a User
 - **Route:** `PUT /users/{userId}`
 - **Description:** Update a user.
 - **Request Body:**
-
   ```json
   {
     "username": "string",
@@ -993,144 +984,109 @@ db.results.insertMany(
     "password": "string"
   }
   ```
-
 - **Response:**
-
   - Status: 200 OK
   - Body:
-
     ```json
-
     ```
 
 ### Habit
-#### List all Habits
+[] List all Habits
 - **Route:** `GET /habits`
 - **Description:** List all habits belong to the current user
 - **Request Body:**
-
   ```json
-
   ```
-
 - **Response:**
-
   - Status: 200 OK
   - Body:
-
     ```json
-
     ```
 
-#### Create a New Habit
-
+[] Create a New Habit
 - **Route:** `POST /habits`
 - **Description:** Create a new habit for the current user
 - **Request Body:**
-
   ```json
-  {
-    "name": "string",
-    "description": "string",
-    "goalValue": "number",
-    "goalFrequency": "number",
-    "reminderTime": "time",
-    "completed": "boolean",
-    "userId": "string"
-  }
   ```
-
 - **Response:**
-
   - Status: 200 OK
   - Body:
-
     ```json
-
     ```
 
-#### Update a Habit
-
+[] Update a Habit
 - **Route:** `PUT /habits/{habitId}`
 - **Description:** Update a habit
 - **Request Body:**
   ```json
-  {
-    "name": "string",
-    "description": "string",
-    "goalValue": "number",
-    "goalFrequency": "number",
-    "reminderTime": "time",
-    "completed": "boolean",
-    "userId": "string"
-  }
   ```
 - **Response:**
-
   - Status: 200 OK
   - Body:
-
     ```json
-
     ```
 
-#### Delete a Habit
-
+[] Delete a Habit
 - **Route:** `DELETE /habits/{habitId}`
 - **Description:** Delete a habit
 - **Request Body:**
-
   ```json
-
   ```
-
 - **Response:**
-
   - Status: 200 OK
   - Body:
-
     ```json
-
     ```
 
-### Progress
-
-#### View the Progress of a Habit
-
-- **Route:** `GET /habits/{id}/progress/`
+[] Track a Habit
+- **Route:** `POST /habits/{id}/track/`
 - **Description:** Get a list of completion dates of a habit
 - **Request Body:**
-
   ```json
-
   ```
-
 - **Response:**
-
   - Status: 200 OK
   - Body:
-
     ```json
-
     ```
-
-#### Update the Progress of a Habit
-
-- **Route:** `POST /habits/{id}/progresses/`
-- **Description:** Mark or unmark the completion of a habit on a given date
+    
+## Instruction
+[] Get instruction quotes
+- **Route:** `GET /instructions/`
+- **Description:** Get an instruction for a given date
 - **Request Body:**
   ```json
-  {
-  "date": "string"
-  "completed": "boolean"
-  }
   ```
 - **Response:**
-
   - Status: 200 OK
   - Body:
-
     ```json
+    ```
 
+## Quote
+[] Get motivation quotes
+- **Route:** `GET /quotes/`
+- **Description:** Get a quote for a given date
+- **Request Body:**
+  ```json
+  ```
+- **Response:**
+  - Status: 200 OK
+  - Body:
+    ```json
+    ```
 
+    
+## Result
+[] Get result
+- **Route:** `GET /results/`
+- **Description:** Get a result for a given date
+- **Request Body:**
+  ```json
+  ```
+- **Response:**
+  - Status: 200 OK
+  - Body:
+    ```json
     ```
