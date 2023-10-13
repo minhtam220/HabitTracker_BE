@@ -198,116 +198,729 @@ This schema represents a result of a habit on a date.
 | `totalDopamines`     | Number   | The total dopamines of the habit|
 | `currentStreak`     | Number   | The current streak of the habit|
 
-
-
 ## Sample Data
 [x] users: 1 record
 ```json
-{
-  "_id": {
-    "$oid": "65164604273dec1588a68451"
-  },
-  "username": "tam",
-  "email": "tam@gmail.com",
-  "password": "$2b$10$1nSReV.qq8.tllX08R5ESeHg7wF.7Tfnqqn0KWpUZWZxfXrTeIxvG",
-  "createdAt": {
-    "$date": "2023-09-29T03:35:32.894Z"
-  },
-  "__v": 0
-}
+db.users.insertMany([
+  {
+    "_id": {
+      "$oid": "65164604273dec1588a68451"
+    },
+    "username": "tam",
+    "email": "tam@gmail.com",
+    "password": "$2b$10$1nSReV.qq8.tllX08R5ESeHg7wF.7Tfnqqn0KWpUZWZxfXrTeIxvG",
+    "createdAt": {
+      "$date": "2023-09-29T03:35:32.894Z"
+    },
+    "__v": 0
+  }
+])
 ```
 
 [x] setting: 1 record
 ```json
-{
-  "max_habits": 5,
-  "analyse_duration": 7,
-  "build_duration": 21,
-  "check_duration": 7,
-  "analyse_stage_analyse_page": ["view", "create", "edit", "track"]`,
-  "analyse_stage_build_page": []`,
-  "analyse_stage_check_page": `["view"],
-  "build_stage_analyse_page": ["view"],
-  "build_stage_build_page": ["view", "track"],
-  "build_stage_check_page": [],
-  "check_stage_analyse_page": ["view"],
-  "check_stage_build_page": ["view"],
-  "check_stage_check_page": ["track"],
-  "user": "65164604273dec1588a68451" //replace with actual user_id
-}
+db.settings.insertMany([
+  {
+    "_id": {
+      "$oid": "6527fc202af98e626d92c4bd"
+    },
+    "max_habits": 5,
+    "analyse_duration": 7,
+    "build_duration": 21,
+    "check_duration": 7,
+    "analyse_stage_analyse_page": [
+      "view",
+      "create",
+      "edit",
+      "track"
+    ],
+    "analyse_stage_build_page": [],
+    "analyse_stage_check_page": [
+      "view"
+    ],
+    "build_stage_analyse_page": [
+      "view"
+    ],
+    "build_stage_build_page": [
+      "view",
+      "track"
+    ],
+    "build_stage_check_page": [],
+    "check_stage_analyse_page": [
+      "view"
+    ],
+    "check_stage_build_page": [
+      "view"
+    ],
+    "check_stage_check_page": [
+      "track"
+    ],
+    "user": {
+      "$oid": "65164604273dec1588a68451"
+    }
+  }
+])
 ```
 
-[] cycles: 1 record
+[x] cycles: 1 record
 ```json
-{
-  "start_date": "2023-10-01",
-  "end_date": "2023-10-07",
-  "stage": "analyse",
-  "analyse_result": "609f90f3f5fc66362eac73a2", //replace with actual prime habit_id
-  "build_duration": 21,
-  "check_result": "success",
-  "habits": [
-    "609f90f3f5fc66362eac73a3",//replace with actual habit_id
-    "609f90f3f5fc66362eac73a4",//replace with actual habit_id
-    "609f90f3f5fc66362eac73a5",//replace with actual habit_id
-    "609f90f3f5fc66362eac73a4",//replace with actual habit_id
-    "609f90f3f5fc66362eac73a5" //replace with actual habit_id
-  ],
-  "user": "65164604273dec1588a68451" //replace with actual user_id
-}
+db.cycles.insertMany([
+  {
+    "_id": {
+      "$oid": "6528cae82af98e626d92c4cb"
+    },
+    "start_date": "2023-10-09",
+    "end_date": "2023-10-15",
+    "stage": "analyse",
+    "analyse_result": "",
+    "build_duration": 21,
+    "check_result": "success",
+    "habits": [
+      { "$oid": "6527ff513bc4769f6b04b3b0" },
+      { "$oid": "6527ff513bc4769f6b04b3b2" },
+      { "$oid": "6527ff513bc4769f6b04b3b3" },
+      { "$oid": "6527ff513bc4769f6b04b3b1" },
+      { "$oid": "6527ff513bc4769f6b04b3af" }
+    ],
+    "user": {
+      "$oid": "65164604273dec1588a68451"
+    }
+  }
+])
+
 ```
 
-[x] motivation: 5 records
+[x] quotes (motivations) : 5 records
 ```json
 db.quotes.insertMany([
-    { "text": "Successful people are simply those with successful habits. – Brian Tracy" },
-    { "text": "We are what we repeatedly do. Excellence then, is not an act, but a habit. – Aristotle" },
-    { "text": "Watch your actions, they become your habits. Watch your habits, they become your character. – Vince Lombardi" },
-    { "text": "The successful person makes a habit of doing what the failing person doesn’t like to do. – Thomas Edison" },
-    { "text": "The hard must become habit. The habit must become easy. The easy must become beautiful. – Doug Henning" }
-]);
-```
-
-```json
-
+  {
+    "_id": {
+      "$oid": "6527fde73bc4769f6b04b3aa"
+    },
+    "text": "Successful people are simply those with successful habits. – Brian Tracy"
+  },
+  {
+    "_id": {
+      "$oid": "6527fde73bc4769f6b04b3ab"
+    },
+    "text": "We are what we repeatedly do. Excellence then, is not an act, but a habit. – Aristotle"
+  },
+  {
+    "_id": {
+      "$oid": "6527fde73bc4769f6b04b3ac"
+    },
+    "text": "Watch your actions, they become your habits. Watch your habits, they become your character. – Vince Lombardi"
+  },
+  {
+    "_id": {
+      "$oid": "6527fde73bc4769f6b04b3ad"
+    },
+    "text": "The successful person makes a habit of doing what the failing person doesn’t like to do. – Thomas Edison"
+  },
+  {
+    "_id": {
+      "$oid": "6527fde73bc4769f6b04b3ae"
+    },
+    "text": "The hard must become habit. The habit must become easy. The easy must become beautiful. – Doug Henning"
+  }
+])
 ```
 
 [] instructions: 6 records
-
-
-[] habits: 5 records
 ```json
-db.habits.insertMany([
+db.collectionName.insertMany([
   {
-    "description": "Exercise for 30 minutes daily",
-    "type": "good",
-    "results": []
+    "_id": {
+      "$oid": "6528d36f2af98e626d92c4d0"
+    },
+    "stage": "analyse",
+    "day": 1,
+    "text": "We all have enough will power to build or break one habit at a time.\n - List the 5 habits you want to break or build.\n - Keep track of them for one week starting from today.\n - Know the prime habit on Day 7 and start building it.\n"
   },
   {
+    "_id": {
+      "$oid": "6528d36f2af98e626d92c4d1"
+    },
+    "stage": "analyse",
+    "day": 7,
+    "text": "Here is the result:\n"
+  },
+  {
+    "_id": {
+      "$oid": "6528d36f2af98e626d92c4d2"
+    },
+    "stage": "build",
+    "day": 1,
+    "text": "Please use all the will power you have to build/break this prime habit.\n - Keep track of the prime habit starting from today.\n - You will be successful for building/breaking it for 21 days non-stop.\n - Celebrate for small win when you build/break it for a day.\n - Tolerate when you don't make it for a day.\n"
+  },
+  {
+    "_id": {
+      "$oid": "6528d36f2af98e626d92c4d3"
+    },
+    "stage": "build",
+    "day": 7,
+    "text": "Here is the result:\n"
+  },
+  {
+    "_id": {
+      "$oid": "6528d36f2af98e626d92c4d4"
+    },
+    "stage": "check",
+    "day": 1,
+    "text": "Please use all the will power you have to build/break this prime habit.\n - Keep track all of your habits again starting from today.\n - You will be successful for building/breaking the prime habit for 7 days non-stop.\n"
+  },
+  {
+    "_id": {
+      "$oid": "6528d36f2af98e626d92c4d5"
+    },
+    "stage": "check",
+    "day": 7,
+    "text": "Here is the result:\n"
+  }
+])
+```
+
+[x] habits: 5 records
+```json
+db.collectionName.insertMany([
+  {
+    "_id": {
+      "$oid": "6527ff513bc4769f6b04b3b0"
+    },
     "description": "Read a book for 20 minutes before bedtime",
     "type": "good",
     "results": []
   },
   {
-    "description": "Limit screen time to 2 hours per day",
-    "type": "good",
-    "results": []
-  },
-  {
+    "_id": {
+      "$oid": "6527ff513bc4769f6b04b3b2"
+    },
     "description": "Avoid sugary snacks and drinks",
     "type": "good",
     "results": []
   },
   {
+    "_id": {
+      "$oid": "6527ff513bc4769f6b04b3b3"
+    },
     "description": "Smoking cessation program",
     "type": "bad",
     "results": []
+  },
+  {
+    "_id": {
+      "$oid": "6527ff513bc4769f6b04b3b1"
+    },
+    "description": "Limit screen time to 2 hours per day",
+    "type": "good",
+    "results": []
+  },
+  {
+    "_id": {
+      "$oid": "6527ff513bc4769f6b04b3af"
+    },
+    "description": "Exercise for 30 minutes daily",
+    "type": "good",
+    "results": []
   }
-]);
+])
 ```
 
 [] results: 35 records
-
+```json
+db.results.insertMany(
+[{
+  "_id": {
+    "$oid": "6528dd8c3bc4769f6b04b3d7"
+  },
+  "result_date": {
+    "$date": "2023-10-09T00:00:00.000Z"
+  },
+  "complete": false,
+  "stage": "analyse",
+  "habit": "6527ff513bc4769f6b04b3b0",
+  "totalCompletions": 0,
+  "totalDopamines": 0,
+  "currentStreak": 0
+},
+{
+  "_id": {
+    "$oid": "6528dd8c3bc4769f6b04b3d8"
+  },
+  "result_date": {
+    "$date": "2023-10-10T00:00:00.000Z"
+  },
+  "complete": false,
+  "stage": "analyse",
+  "habit": "6527ff513bc4769f6b04b3b0",
+  "totalCompletions": 0,
+  "totalDopamines": 0,
+  "currentStreak": 0
+},
+{
+  "_id": {
+    "$oid": "6528dd8c3bc4769f6b04b3d9"
+  },
+  "result_date": {
+    "$date": "2023-10-11T00:00:00.000Z"
+  },
+  "complete": false,
+  "stage": "analyse",
+  "habit": "6527ff513bc4769f6b04b3b0",
+  "totalCompletions": 0,
+  "totalDopamines": 0,
+  "currentStreak": 0
+},
+{
+  "_id": {
+    "$oid": "6528dd8c3bc4769f6b04b3da"
+  },
+  "result_date": {
+    "$date": "2023-10-12T00:00:00.000Z"
+  },
+  "complete": false,
+  "stage": "analyse",
+  "habit": "6527ff513bc4769f6b04b3b0",
+  "totalCompletions": 0,
+  "totalDopamines": 0,
+  "currentStreak": 0
+},
+{
+  "_id": {
+    "$oid": "6528dd8c3bc4769f6b04b3db"
+  },
+  "result_date": {
+    "$date": "2023-10-13T00:00:00.000Z"
+  },
+  "complete": false,
+  "stage": "analyse",
+  "habit": "6527ff513bc4769f6b04b3b0",
+  "totalCompletions": 0,
+  "totalDopamines": 0,
+  "currentStreak": 0
+},
+{
+  "_id": {
+    "$oid": "6528dd8c3bc4769f6b04b3dc"
+  },
+  "result_date": {
+    "$date": "2023-10-14T00:00:00.000Z"
+  },
+  "complete": false,
+  "stage": "analyse",
+  "habit": "6527ff513bc4769f6b04b3b0",
+  "totalCompletions": 0,
+  "totalDopamines": 0,
+  "currentStreak": 0
+},
+{
+  "_id": {
+    "$oid": "6528dd8c3bc4769f6b04b3dd"
+  },
+  "result_date": {
+    "$date": "2023-10-15T00:00:00.000Z"
+  },
+  "complete": false,
+  "stage": "analyse",
+  "habit": "6527ff513bc4769f6b04b3b0",
+  "totalCompletions": 0,
+  "totalDopamines": 0,
+  "currentStreak": 0
+},
+{
+  "_id": {
+    "$oid": "6528dd9f3bc4769f6b04b3de"
+  },
+  "result_date": {
+    "$date": "2023-10-09T00:00:00.000Z"
+  },
+  "complete": false,
+  "stage": "analyse",
+  "habit": "6527ff513bc4769f6b04b3b2",
+  "totalCompletions": 0,
+  "totalDopamines": 0,
+  "currentStreak": 0
+},
+{
+  "_id": {
+    "$oid": "6528dd9f3bc4769f6b04b3df"
+  },
+  "result_date": {
+    "$date": "2023-10-10T00:00:00.000Z"
+  },
+  "complete": false,
+  "stage": "analyse",
+  "habit": "6527ff513bc4769f6b04b3b2",
+  "totalCompletions": 0,
+  "totalDopamines": 0,
+  "currentStreak": 0
+},
+{
+  "_id": {
+    "$oid": "6528dd9f3bc4769f6b04b3e0"
+  },
+  "result_date": {
+    "$date": "2023-10-11T00:00:00.000Z"
+  },
+  "complete": false,
+  "stage": "analyse",
+  "habit": "6527ff513bc4769f6b04b3b2",
+  "totalCompletions": 0,
+  "totalDopamines": 0,
+  "currentStreak": 0
+},
+{
+  "_id": {
+    "$oid": "6528dd9f3bc4769f6b04b3e1"
+  },
+  "result_date": {
+    "$date": "2023-10-12T00:00:00.000Z"
+  },
+  "complete": false,
+  "stage": "analyse",
+  "habit": "6527ff513bc4769f6b04b3b2",
+  "totalCompletions": 0,
+  "totalDopamines": 0,
+  "currentStreak": 0
+},
+{
+  "_id": {
+    "$oid": "6528dd9f3bc4769f6b04b3e2"
+  },
+  "result_date": {
+    "$date": "2023-10-13T00:00:00.000Z"
+  },
+  "complete": false,
+  "stage": "analyse",
+  "habit": "6527ff513bc4769f6b04b3b2",
+  "totalCompletions": 0,
+  "totalDopamines": 0,
+  "currentStreak": 0
+},
+{
+  "_id": {
+    "$oid": "6528dd9f3bc4769f6b04b3e3"
+  },
+  "result_date": {
+    "$date": "2023-10-14T00:00:00.000Z"
+  },
+  "complete": false,
+  "stage": "analyse",
+  "habit": "6527ff513bc4769f6b04b3b2",
+  "totalCompletions": 0,
+  "totalDopamines": 0,
+  "currentStreak": 0
+},
+{
+  "_id": {
+    "$oid": "6528dd9f3bc4769f6b04b3e4"
+  },
+  "result_date": {
+    "$date": "2023-10-15T00:00:00.000Z"
+  },
+  "complete": false,
+  "stage": "analyse",
+  "habit": "6527ff513bc4769f6b04b3b2",
+  "totalCompletions": 0,
+  "totalDopamines": 0,
+  "currentStreak": 0
+},
+{
+  "_id": {
+    "$oid": "6528ddb93bc4769f6b04b3e5"
+  },
+  "result_date": {
+    "$date": "2023-10-09T00:00:00.000Z"
+  },
+  "complete": false,
+  "stage": "analyse",
+  "habit": "6527ff513bc4769f6b04b3b3",
+  "totalCompletions": 0,
+  "totalDopamines": 0,
+  "currentStreak": 0
+},
+{
+  "_id": {
+    "$oid": "6528ddb93bc4769f6b04b3e6"
+  },
+  "result_date": {
+    "$date": "2023-10-10T00:00:00.000Z"
+  },
+  "complete": false,
+  "stage": "analyse",
+  "habit": "6527ff513bc4769f6b04b3b3",
+  "totalCompletions": 0,
+  "totalDopamines": 0,
+  "currentStreak": 0
+},
+{
+  "_id": {
+    "$oid": "6528ddb93bc4769f6b04b3e7"
+  },
+  "result_date": {
+    "$date": "2023-10-11T00:00:00.000Z"
+  },
+  "complete": false,
+  "stage": "analyse",
+  "habit": "6527ff513bc4769f6b04b3b3",
+  "totalCompletions": 0,
+  "totalDopamines": 0,
+  "currentStreak": 0
+},
+{
+  "_id": {
+    "$oid": "6528ddb93bc4769f6b04b3e8"
+  },
+  "result_date": {
+    "$date": "2023-10-12T00:00:00.000Z"
+  },
+  "complete": false,
+  "stage": "analyse",
+  "habit": "6527ff513bc4769f6b04b3b3",
+  "totalCompletions": 0,
+  "totalDopamines": 0,
+  "currentStreak": 0
+},
+{
+  "_id": {
+    "$oid": "6528ddb93bc4769f6b04b3e9"
+  },
+  "result_date": {
+    "$date": "2023-10-13T00:00:00.000Z"
+  },
+  "complete": false,
+  "stage": "analyse",
+  "habit": "6527ff513bc4769f6b04b3b3",
+  "totalCompletions": 0,
+  "totalDopamines": 0,
+  "currentStreak": 0
+},
+{
+  "_id": {
+    "$oid": "6528ddb93bc4769f6b04b3ea"
+  },
+  "result_date": {
+    "$date": "2023-10-14T00:00:00.000Z"
+  },
+  "complete": false,
+  "stage": "analyse",
+  "habit": "6527ff513bc4769f6b04b3b3",
+  "totalCompletions": 0,
+  "totalDopamines": 0,
+  "currentStreak": 0
+},
+{
+  "_id": {
+    "$oid": "6528ddb93bc4769f6b04b3eb"
+  },
+  "result_date": {
+    "$date": "2023-10-15T00:00:00.000Z"
+  },
+  "complete": false,
+  "stage": "analyse",
+  "habit": "6527ff513bc4769f6b04b3b3",
+  "totalCompletions": 0,
+  "totalDopamines": 0,
+  "currentStreak": 0
+},
+{
+  "_id": {
+    "$oid": "6528ddc93bc4769f6b04b3ec"
+  },
+  "result_date": {
+    "$date": "2023-10-09T00:00:00.000Z"
+  },
+  "complete": false,
+  "stage": "analyse",
+  "habit": "6527ff513bc4769f6b04b3b1",
+  "totalCompletions": 0,
+  "totalDopamines": 0,
+  "currentStreak": 0
+},
+{
+  "_id": {
+    "$oid": "6528ddc93bc4769f6b04b3ed"
+  },
+  "result_date": {
+    "$date": "2023-10-10T00:00:00.000Z"
+  },
+  "complete": false,
+  "stage": "analyse",
+  "habit": "6527ff513bc4769f6b04b3b1",
+  "totalCompletions": 0,
+  "totalDopamines": 0,
+  "currentStreak": 0
+},
+{
+  "_id": {
+    "$oid": "6528ddc93bc4769f6b04b3ee"
+  },
+  "result_date": {
+    "$date": "2023-10-11T00:00:00.000Z"
+  },
+  "complete": false,
+  "stage": "analyse",
+  "habit": "6527ff513bc4769f6b04b3b1",
+  "totalCompletions": 0,
+  "totalDopamines": 0,
+  "currentStreak": 0
+},
+{
+  "_id": {
+    "$oid": "6528ddc93bc4769f6b04b3ef"
+  },
+  "result_date": {
+    "$date": "2023-10-12T00:00:00.000Z"
+  },
+  "complete": false,
+  "stage": "analyse",
+  "habit": "6527ff513bc4769f6b04b3b1",
+  "totalCompletions": 0,
+  "totalDopamines": 0,
+  "currentStreak": 0
+},
+{
+  "_id": {
+    "$oid": "6528ddc93bc4769f6b04b3f0"
+  },
+  "result_date": {
+    "$date": "2023-10-13T00:00:00.000Z"
+  },
+  "complete": false,
+  "stage": "analyse",
+  "habit": "6527ff513bc4769f6b04b3b1",
+  "totalCompletions": 0,
+  "totalDopamines": 0,
+  "currentStreak": 0
+},
+{
+  "_id": {
+    "$oid": "6528ddc93bc4769f6b04b3f1"
+  },
+  "result_date": {
+    "$date": "2023-10-14T00:00:00.000Z"
+  },
+  "complete": false,
+  "stage": "analyse",
+  "habit": "6527ff513bc4769f6b04b3b1",
+  "totalCompletions": 0,
+  "totalDopamines": 0,
+  "currentStreak": 0
+},
+{
+  "_id": {
+    "$oid": "6528ddc93bc4769f6b04b3f2"
+  },
+  "result_date": {
+    "$date": "2023-10-15T00:00:00.000Z"
+  },
+  "complete": false,
+  "stage": "analyse",
+  "habit": "6527ff513bc4769f6b04b3b1",
+  "totalCompletions": 0,
+  "totalDopamines": 0,
+  "currentStreak": 0
+},
+{
+  "_id": {
+    "$oid": "6528dddb3bc4769f6b04b3f3"
+  },
+  "result_date": {
+    "$date": "2023-10-09T00:00:00.000Z"
+  },
+  "complete": false,
+  "stage": "analyse",
+  "habit": "6527ff513bc4769f6b04b3af",
+  "totalCompletions": 0,
+  "totalDopamines": 0,
+  "currentStreak": 0
+},
+{
+  "_id": {
+    "$oid": "6528dddb3bc4769f6b04b3f4"
+  },
+  "result_date": {
+    "$date": "2023-10-10T00:00:00.000Z"
+  },
+  "complete": false,
+  "stage": "analyse",
+  "habit": "6527ff513bc4769f6b04b3af",
+  "totalCompletions": 0,
+  "totalDopamines": 0,
+  "currentStreak": 0
+},
+{
+  "_id": {
+    "$oid": "6528dddb3bc4769f6b04b3f5"
+  },
+  "result_date": {
+    "$date": "2023-10-11T00:00:00.000Z"
+  },
+  "complete": false,
+  "stage": "analyse",
+  "habit": "6527ff513bc4769f6b04b3af",
+  "totalCompletions": 0,
+  "totalDopamines": 0,
+  "currentStreak": 0
+},
+{
+  "_id": {
+    "$oid": "6528dddb3bc4769f6b04b3f6"
+  },
+  "result_date": {
+    "$date": "2023-10-12T00:00:00.000Z"
+  },
+  "complete": false,
+  "stage": "analyse",
+  "habit": "6527ff513bc4769f6b04b3af",
+  "totalCompletions": 0,
+  "totalDopamines": 0,
+  "currentStreak": 0
+},
+{
+  "_id": {
+    "$oid": "6528dddb3bc4769f6b04b3f7"
+  },
+  "result_date": {
+    "$date": "2023-10-13T00:00:00.000Z"
+  },
+  "complete": false,
+  "stage": "analyse",
+  "habit": "6527ff513bc4769f6b04b3af",
+  "totalCompletions": 0,
+  "totalDopamines": 0,
+  "currentStreak": 0
+},
+{
+  "_id": {
+    "$oid": "6528dddb3bc4769f6b04b3f8"
+  },
+  "result_date": {
+    "$date": "2023-10-14T00:00:00.000Z"
+  },
+  "complete": false,
+  "stage": "analyse",
+  "habit": "6527ff513bc4769f6b04b3af",
+  "totalCompletions": 0,
+  "totalDopamines": 0,
+  "currentStreak": 0
+},
+{
+  "_id": {
+    "$oid": "6528dddb3bc4769f6b04b3f9"
+  },
+  "result_date": {
+    "$date": "2023-10-15T00:00:00.000Z"
+  },
+  "complete": false,
+  "stage": "analyse",
+  "habit": "6527ff513bc4769f6b04b3af",
+  "totalCompletions": 0,
+  "totalDopamines": 0,
+  "currentStreak": 0
+}]
+)
+```
 
 ## API Routes
 
