@@ -927,7 +927,7 @@ db.results.insertMany(
 
 ### Authentication
 
-[] Register a New User
+[x] Register a New User
 - **Route:** `POST /auth/register`
 - **Description:** Register a new user.
 - **Request Body:**
@@ -944,7 +944,7 @@ db.results.insertMany(
     ```json
     ```
 
-[] Login a User
+[x] Login a User
 - **Route:** `POST /auth/login`
 - **Description:** Login a user.
 - **Request Body:**
@@ -991,7 +991,7 @@ db.results.insertMany(
     ```
 
 ### Habit
-[] List all Habits
+[x] List all Habits
 - **Route:** `GET /habits`
 - **Description:** List all habits belong to the current user
 - **Request Body:**
@@ -1000,10 +1000,10 @@ db.results.insertMany(
 - **Response:**
   - Status: 200 OK
   - Body:
-    ```json
-    ```
+  ```json
+  ```
 
-[] Create a New Habit
+[x] Create a New Habit
 - **Route:** `POST /habits`
 - **Description:** Create a new habit for the current user
 - **Request Body:**
@@ -1011,11 +1011,10 @@ db.results.insertMany(
   ```
 - **Response:**
   - Status: 200 OK
-  - Body:
-    ```json
-    ```
+  ```json
+  ```
 
-[] Update a Habit
+[x] Update a Habit
 - **Route:** `PUT /habits/{habitId}`
 - **Description:** Update a habit
 - **Request Body:**
@@ -1027,7 +1026,7 @@ db.results.insertMany(
     ```json
     ```
 
-[] Delete a Habit
+[x] Delete a Habit
 - **Route:** `DELETE /habits/{habitId}`
 - **Description:** Delete a habit
 - **Request Body:**
@@ -1039,9 +1038,9 @@ db.results.insertMany(
     ```json
     ```
 
-[] Track a Habit
-- **Route:** `POST /habits/{id}/track/`
-- **Description:** Get a list of completion dates of a habit
+[x] Track a Habit
+- **Route:** `POST /habits/{habitId}/track/`
+- **Description:** Track a habit for a date
 - **Request Body:**
   ```json
   ```
@@ -1052,7 +1051,7 @@ db.results.insertMany(
     ```
     
 ## Instruction
-[] Get instruction quotes
+[x] Get instruction quotes
 - **Route:** `GET /instructions/`
 - **Description:** Get an instruction for a given date
 - **Request Body:**
@@ -1065,7 +1064,7 @@ db.results.insertMany(
     ```
 
 ## Quote
-[] Get motivation quotes
+[x] Get motivation quotes
 - **Route:** `GET /quotes/`
 - **Description:** Get a quote for a given date
 - **Request Body:**
@@ -1077,7 +1076,6 @@ db.results.insertMany(
     ```json
     ```
 
-    
 ## Result
 [] Get result
 - **Route:** `GET /results/`
