@@ -155,36 +155,35 @@ router.get("/me", async (req, res) => {
   const accessToken = req.headers.authorization.split(" ")[1];
 
   try {
-    const decodedToken = jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET);
+    const decodedToken = jwt.verify(
+      accessToken,
+      process.env.ACCESS_TOKEN_SECRET
+    );
     const userId = decodedToken.userId;
 
     // Assuming you're using some sort of database model (e.g., Mongoose)
     // Retrieve user information based on userId
-    const user = await User.findById(_id: userId);
+    const user = await User.findById({ _id: userId });
 
     if (!user) {
       throw new Error("User not found");
     }
 
     ///return the success message
-  return res.json({
-    success: true,
-    message: "Access token verified successfully",
-    data: {
-      user: { _id: user._id, username: user.username, email: user.email },
-      accessToken,
-    },
-  });
-
+    return res.json({
+      success: true,
+      message: "Access token verified successfully",
+      data: {
+        user: { _id: user._id, username: user.username, email: user.email },
+        accessToken,
+      },
+    });
   } catch (error) {
     // Handle errors (e.g., token invalid or user not found)
     console.error("Error retrieving user info from token:", error);
     return null; // Return null or throw an error, depending on your preference
   }
-
-  
 });
-
 
 router.post("/logout", (req, res) => {
   const accessToken = req.headers.authorization.split(" ")[1];
