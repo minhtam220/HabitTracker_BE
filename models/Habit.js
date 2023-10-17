@@ -2,38 +2,24 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const HabitSchema = new Schema({
-  name: {
-    type: String,
-    required: true,
-  },
   description: {
     type: String,
-  },
-  goalValue: {
-    type: Number,
     required: true,
   },
-  goalFrequency: {
-    type: Number,
-    required: true,
-  },
-  reminderTime: {
+  type: {
     type: String,
+    enum: ["good", "bad"],
+    required: true,
   },
-  completed: {
-    type: Boolean,
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
-  updatedAt: {
-    type: Date,
-    default: Date.now,
-  },
-  userId: {
+  results: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Result",
+    },
+  ],
+  user: {
     type: Schema.Types.ObjectId,
-    ref: "users",
+    ref: "User",
     required: true,
   },
 });

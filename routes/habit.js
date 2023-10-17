@@ -2,7 +2,8 @@ const express = require("express");
 const router = express.Router();
 
 const Habit = require("../models/Habit");
-const Completion = require("../models/Completion");
+
+const Result = require("../models/Result");
 
 const { verifyToken } = require("../middleware/auth");
 
@@ -12,8 +13,12 @@ const { verifyToken } = require("../middleware/auth");
 router.get("/", verifyToken, async (req, res) => {
   const { userId } = req.body;
 
+  console.log(userId);
+
   try {
-    const habits = await Habit.find({ userId });
+    const habits = await Habit.find({ user: userId });
+
+    console.log("Habits are" + habits);
 
     return res.json({
       success: true,
@@ -35,22 +40,19 @@ router.get("/", verifyToken, async (req, res) => {
 //@desc create a new habit
 //access private
 router.post("/", verifyToken, async (req, res) => {
-  const { name, description, goalValue, goalFrequency, reminderTime, userId } =
-    req.body;
+  const { description, type, userId } = req.body;
 
   // Simple validation
-  if (!name)
-    return res.status(400).json({ success: false, message: "Missing name" });
+  if (!description)
+    return res
+      .status(400)
+      .json({ success: false, message: "Missing description" });
 
   try {
     const newHabit = new Habit({
-      name,
       description,
-      goalValue,
-      goalFrequency,
-      reminderTime,
-      completed: false,
-      userId,
+      type,
+      user: userId,
     });
 
     await newHabit.save();
@@ -72,32 +74,21 @@ router.post("/", verifyToken, async (req, res) => {
 //@desc update a habit
 //access private
 router.put("/:id", verifyToken, async (req, res) => {
-  const {
-    name,
-    description,
-    goalValue,
-    goalFrequency,
-    reminderTime,
-    completed,
-    userId,
-  } = req.body;
+  const { description, type, userId } = req.body;
 
   // Simple validation
-  if (!name)
-    return res.status(400).json({ success: false, message: "Missing name" });
+  if (!description)
+    return res
+      .status(400)
+      .json({ success: false, message: "Missing description" });
 
   try {
     let updatedHabit = {
-      name,
       description,
-      goalValue,
-      goalFrequency,
-      reminderTime,
-      completed,
-      userId,
+      type,
     };
 
-    const habitUpdateCondition = { _id: req.params.id, userId };
+    const habitUpdateCondition = { _id: req.params.id, user: userId };
 
     updatedHabit = await Habit.findOneAndUpdate(
       habitUpdateCondition,
@@ -131,7 +122,7 @@ router.delete("/:id", verifyToken, async (req, res) => {
   const { userId } = req.body;
 
   try {
-    const habitDeleteCondition = { _id: req.params.id, userId };
+    const habitDeleteCondition = { _id: req.params.id, user: userId };
 
     const deletedHabit = await Habit.findOneAndDelete(habitDeleteCondition);
 
@@ -162,7 +153,7 @@ router.get("/:habitId/progress", async (req, res) => {
 
   try {
     // Check if there's already a progress entry for this habit and date
-    let progress = await Completion.find({ habitId: habitId });
+    let progress = await Result.find({ habitId: habitId });
 
     return res.json({
       success: true,
@@ -177,33 +168,34 @@ router.get("/:habitId/progress", async (req, res) => {
   }
 });
 
-// Update progress for a habit on a specific day
-router.put("/:habitId/progress", async (req, res) => {
+// Track a habit on a specific day
+router.put("/:habitId/track", async (req, res) => {
   const { habitId } = req.params;
-  const { date } = req.body;
+  const { result_date, complete } = req.body;
 
   try {
-    // Check if there's already a progress entry for this habit and date
-    let completion = await Completion.findOne({ habitId: habitId, date });
+    //find the result
+    let result = await Result.findOne({ habit: habitId, result_date });
 
-    if (!completion) {
-      // If not, create a new entry
-      completion = new Completion({
-        date,
-        habitId,
+    console.log(result);
+
+    if (!result) {
+      return res.status(401).json({
+        success: false,
+        message: "Habit not found or user not authorized",
       });
-      await completion.save();
     } else {
-      // If there's an existing entry, delete it
-      const deletedCompletion = await Completion.findOneAndDelete({
-        date,
-        habitId: habitId,
+      // If there's an existing entry, update it
+      const updatedResult = await Result.findOneAndUpdate({
+        result_date,
+        complete,
+        habit: habitId,
       });
     }
 
     return res.json({
       success: true,
-      message: "Progress updated successfully",
+      message: "Habit tracked successfully",
     });
   } catch (error) {
     console.error(error);

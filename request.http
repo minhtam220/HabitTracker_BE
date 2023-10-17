@@ -3,9 +3,9 @@ POST http://localhost:2000/api/auth/register
 Content-Type: application/json
 
 {
-  "username": "tam",
-  "email":"tam@gmail.com",
-  "password": "tam"
+  "username": "minhtam",
+  "email":"minhtam@gmail.com",
+  "password": "minhtam"
 }
 
 ### Login
@@ -17,53 +17,58 @@ Content-Type: application/json
   "password": "tam"
 }
 
+### Get cycles
+
+
 ### Get habits
 GET http://localhost:2000/api/habits
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTE2NDYwNDI3M2RlYzE1ODhhNjg0NTEiLCJpYXQiOjE2OTU5NTg2MjF9.FPB9cl77iPfQPoHeAxwPHiz7L1mI5-29sUpyJalzicw
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTE2NDYwNDI3M2RlYzE1ODhhNjg0NTEiLCJpYXQiOjE2OTczNTE4MzB9.PaiDoOEBu_6EM9aEFzTGIc1J_hgsueh0tlYc5geVOkU
 
 ### Create habit
 POST http://localhost:2000/api/habits
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTE2NDYwNDI3M2RlYzE1ODhhNjg0NTEiLCJpYXQiOjE2OTU5NTg2MjF9.FPB9cl77iPfQPoHeAxwPHiz7L1mI5-29sUpyJalzicw
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTE2NDYwNDI3M2RlYzE1ODhhNjg0NTEiLCJpYXQiOjE2OTczNTI0Njl9.5wwNIYxnJECsA17UfSwwNQ-edc3H0kJ9enhP9rJ6Gp0
 
 {
-  "name": "drink peach juice",
-  "description": "drink every day",
-  "goalValue": 21,
-  "goalFrequency": 2,
-  "reminderTime": "10 AM",
-  "completed": false
+  "description": "code 4 hours a day",
+  "type":"good"
 }
 
 ### Update habit
-PUT http://localhost:2000/api/habits/6516484c273dec1588a68456
+PUT http://localhost:2000/api/habits/652b8b47167f2ba2c17d9cda
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTE2NDYwNDI3M2RlYzE1ODhhNjg0NTEiLCJpYXQiOjE2OTU5NTg2MjF9.FPB9cl77iPfQPoHeAxwPHiz7L1mI5-29sUpyJalzicw
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTE2NDYwNDI3M2RlYzE1ODhhNjg0NTEiLCJpYXQiOjE2OTczNTE4MzB9.PaiDoOEBu_6EM9aEFzTGIc1J_hgsueh0tlYc5geVOkU
 
 {
-  "name": "drink water",
-  "description": "drink every day",
-  "goalValue": 21,
-  "goalFrequency": 2,
-  "reminderTime": "10 AM",
-  "completed": false
+  "description": "code 4 hours a day at a coffee shop",
+  "type":"good"
 }
 
 ### Delete habit
-DELETE http://localhost:2000/api/habits/6516484c273dec1588a68456
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTE2NDYwNDI3M2RlYzE1ODhhNjg0NTEiLCJpYXQiOjE2OTU5NTg2MjF9.FPB9cl77iPfQPoHeAxwPHiz7L1mI5-29sUpyJalzicw
+DELETE http://localhost:2000/api/habits/652b8b47167f2ba2c17d9cda
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTE2NDYwNDI3M2RlYzE1ODhhNjg0NTEiLCJpYXQiOjE2OTczNTE4MzB9.PaiDoOEBu_6EM9aEFzTGIc1J_hgsueh0tlYc5geVOkU
 
-### View progress
-GET http://localhost:2000/api/habits/6516484c273dec1588a68456/progress
+### Track habit
+PUT http://localhost:2000/api/habits/6527ff513bc4769f6b04b3b0/track
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTE2NDYwNDI3M2RlYzE1ODhhNjg0NTEiLCJpYXQiOjE2OTU5NTg2MjF9.FPB9cl77iPfQPoHeAxwPHiz7L1mI5-29sUpyJalzicw
-
-### Update progress
-PUT http://localhost:2000/api/habits/6516484c273dec1588a68456/progress
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTE2NDYwNDI3M2RlYzE1ODhhNjg0NTEiLCJpYXQiOjE2OTU5NTg2MjF9.FPB9cl77iPfQPoHeAxwPHiz7L1mI5-29sUpyJalzicw
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTE2NDYwNDI3M2RlYzE1ODhhNjg0NTEiLCJpYXQiOjE2OTczNTQ5OTd9.qEG-imY30pluXCg22uycBtXyuz5xfLKCsdtgCutGu7k
 
 {
-  "date": "2023-09-22"
+  "result_date": "2023-10-09",
+  "complete": true
 }
+
+### Get instruction
+GET http://localhost:2000/api/instructions/
+Content-Type: application/json
+
+{
+  "stage": "analyse",
+  "day": 7
+}
+
+### Get motivation
+GET http://localhost:2000/api/motivations/
+Content-Type: application/json
+

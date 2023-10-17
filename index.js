@@ -7,6 +7,12 @@ const authRouter = require("./routes/auth");
 // Import the habit router module from the 'auth' file in the 'routes' directory.
 const habitRouter = require("./routes/habit");
 
+// Import the habit router module from the 'auth' file in the 'routes' directory.
+const instructionRouter = require("./routes/instruction");
+
+// Import the habit router module from the 'auth' file in the 'routes' directory.
+const motivationRouter = require("./routes/motivation");
+
 // Connect to MongoDB
 const mongoose = require("mongoose");
 
@@ -47,8 +53,25 @@ app.use(express.json());
 // Define routes for authentication
 app.use("/api/auth", authRouter);
 
+/*
+// Define routes for setting
+app.use("/api/auth", authRouter);
+
+// Define routes for cycle
+app.use("/api/auth", authRouter);
+
+// Define routes for motivation
+app.use("/api/auth", authRouter);
+*/
+
 // Define routes for habit
 app.use("/api/habits", habitRouter);
+
+// Define routes for instruction
+app.use("/api/instructions", instructionRouter);
+
+// Define routes for instruction
+app.use("/api/motivations", motivationRouter);
 
 // Start the server
 const PORT = 2000;
