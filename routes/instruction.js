@@ -9,11 +9,13 @@ router.get("/", async (req, res) => {
   try {
     const instruction = await Instruction.find({ stage, day });
 
+    console.log(instruction);
+
     return res.json({
       success: true,
       message: "Instruction retrieved successfully",
       data: {
-        instruction,
+        instruction: instruction,
       },
     });
   } catch (error) {

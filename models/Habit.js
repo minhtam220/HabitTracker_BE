@@ -11,12 +11,6 @@ const HabitSchema = new Schema({
     enum: ["good", "bad"],
     required: true,
   },
-  results: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Result",
-    },
-  ],
   user: {
     type: Schema.Types.ObjectId,
     ref: "User",

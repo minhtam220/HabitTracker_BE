@@ -2,30 +2,46 @@ const express = require("express");
 const router = express.Router();
 
 const Habit = require("../models/Habit");
-
-const Result = require("../models/Result");
+const Completion = require("../models/Completion");
 
 const { verifyToken } = require("../middleware/auth");
+const jwt = require("jsonwebtoken");
 
 //@route GET api/habits/
 //@desc list all habits belong to the current user
 //access private
-router.get("/", verifyToken, async (req, res) => {
-  const { userId } = req.body;
-
-  console.log(userId);
+router.get("/me", verifyToken, async (req, res) => {
+  const accessToken = req.headers.authorization.split(" ")[1];
 
   try {
-    const habits = await Habit.find({ user: userId });
+    const decodedToken = jwt.verify(
+      accessToken,
+      process.env.ACCESS_TOKEN_SECRET
+    );
+    const userId = decodedToken.userId;
 
-    console.log("Habits are" + habits);
+    //console.log(userId);
+
+    let habits = await Habit.find({ user: userId });
+    //.populate("Result");
+
+    const habitsWithCompletions = [];
+
+    for (const habit of habits) {
+      const completions = await Completion.find({ habit: habit._id });
+      const habitWithCompletions = {
+        ...habit._doc,
+        completions: completions.map((completion) => completion._doc),
+      };
+      habitsWithCompletions.push(habitWithCompletions);
+    }
 
     return res.json({
       success: true,
       message: "Habits retrieved successfully",
       data: {
-        habits: habits,
-        count: habits.length, // Add the count property
+        habits: habitsWithCompletions,
+        count: habitsWithCompletions.length, // Add the count property
       },
     });
   } catch (error) {
@@ -171,32 +187,53 @@ router.get("/:habitId/progress", async (req, res) => {
 // Track a habit on a specific day
 router.put("/:habitId/track", async (req, res) => {
   const { habitId } = req.params;
-  const { result_date, complete } = req.body;
+  const { completion_date, complete } = req.body;
 
   try {
     //find the result
-    let result = await Result.findOne({ habit: habitId, result_date });
+    let completion = await Completion.findOne({
+      habit: habitId,
+      completion_date: completion_date,
+    });
 
-    console.log(result);
+    if (completion) {
+      // If there's an existing entry, update it
+      let updatedCompletion = {
+        complete,
+      };
 
-    if (!result) {
-      return res.status(401).json({
-        success: false,
-        message: "Habit not found or user not authorized",
+      const completionUpdateCondition = {
+        habit: habitId,
+        completion_date: completion_date,
+      };
+
+      updatedCompletion = await Completion.findOneAndUpdate(
+        completionUpdateCondition,
+        updatedCompletion,
+        { new: true }
+      );
+
+      return res.json({
+        success: true,
+        message: "Completion updated successfully",
+        data: updatedCompletion,
       });
     } else {
-      // If there's an existing entry, update it
-      const updatedResult = await Result.findOneAndUpdate({
-        result_date,
-        complete,
+      // If there's not an existing entry, create it
+      const newCompletion = new Completion({
+        completion_date: completion_date,
+        complete: complete,
         habit: habitId,
       });
-    }
 
-    return res.json({
-      success: true,
-      message: "Habit tracked successfully",
-    });
+      await newCompletion.save();
+
+      return res.json({
+        success: true,
+        message: "Completion created successfully",
+        data: newCompletion,
+      });
+    }
   } catch (error) {
     console.error(error);
     return res

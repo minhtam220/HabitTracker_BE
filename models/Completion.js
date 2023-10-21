@@ -2,13 +2,17 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const CompletionSchema = new Schema({
-  date: {
+  completion_date: {
     type: Date,
     required: true,
   },
-  habitId: {
+  habit: {
     type: Schema.Types.ObjectId,
     ref: "habits",
+    required: true,
+  },
+  complete: {
+    type: Boolean,
     required: true,
   },
 });

@@ -17,16 +17,14 @@ Content-Type: application/json
   "password": "tam"
 }
 
-### Get cycles
-
-
 ### Get habits
-GET http://localhost:2000/api/habits
+GET http://localhost:2000/api/habits/me
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTE2NDYwNDI3M2RlYzE1ODhhNjg0NTEiLCJpYXQiOjE2OTczNTE4MzB9.PaiDoOEBu_6EM9aEFzTGIc1J_hgsueh0tlYc5geVOkU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTE2NDYwNDI3M2RlYzE1ODhhNjg0NTEiLCJpYXQiOjE2OTc1NDQ1MTF9.1Q2gDezCNGmDU9j35U3dUViNsyV6W85oG6CDPHEV6z0
 
 ### Create habit
 POST http://localhost:2000/api/habits
+
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTE2NDYwNDI3M2RlYzE1ODhhNjg0NTEiLCJpYXQiOjE2OTczNTI0Njl9.5wwNIYxnJECsA17UfSwwNQ-edc3H0kJ9enhP9rJ6Gp0
 
@@ -52,10 +50,10 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTE2N
 ### Track habit
 PUT http://localhost:2000/api/habits/6527ff513bc4769f6b04b3b0/track
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTE2NDYwNDI3M2RlYzE1ODhhNjg0NTEiLCJpYXQiOjE2OTczNTQ5OTd9.qEG-imY30pluXCg22uycBtXyuz5xfLKCsdtgCutGu7k
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTE2NDYwNDI3M2RlYzE1ODhhNjg0NTEiLCJpYXQiOjE2OTc3NzIxNDV9.PB-sjTqjmEFEa714w3vOka29wAdCOPi_DBTbYj5x0Us
 
 {
-  "result_date": "2023-10-09",
+  "completion_date": "2023-10-17T00:00:00.000Z",
   "complete": true
 }
 
@@ -72,3 +70,11 @@ Content-Type: application/json
 GET http://localhost:2000/api/motivations/
 Content-Type: application/json
 
+### Get result
+GET http://localhost:2000/api/results/
+Content-Type: application/json
+
+{
+  "result_date": "analyse",
+  "day": 7
+}
