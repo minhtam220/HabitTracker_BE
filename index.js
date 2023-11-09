@@ -1,16 +1,20 @@
-// Load environment variables from .env file
+//explain the following codes
+//write the comments for all of the following codes
+require("express-async-errors");
+
+// Import the dotenv module to read the .env file
 require("dotenv").config();
 
-// Import the authentication router module from the 'auth' file in the 'routes' directory.
+// Import the auth router module from the 'auth' file in the 'routes' directory.
 const authRouter = require("./routes/auth");
 
-// Import the habit router module from the 'auth' file in the 'routes' directory.
+// Import the habit router module from the 'habit' file in the 'routes' directory.
 const habitRouter = require("./routes/habit");
 
-// Import the habit router module from the 'auth' file in the 'routes' directory.
+// Import the instruction router module from the 'instruction' file in the 'routes' directory.
 const instructionRouter = require("./routes/instruction");
 
-// Import the habit router module from the 'auth' file in the 'routes' directory.
+// Import the motivation router module from the 'motivation' file in the 'routes' directory.
 const motivationRouter = require("./routes/motivation");
 
 // Connect to MongoDB
@@ -72,6 +76,11 @@ app.use("/api/instructions", instructionRouter);
 
 // Define routes for instruction
 app.use("/api/motivations", motivationRouter);
+
+app.use((err, req, res, next) => {
+  console.log(err);
+  res.status(500).json({ success: false, message: "Internal server error" });
+});
 
 // Start the server
 const PORT = 2000;

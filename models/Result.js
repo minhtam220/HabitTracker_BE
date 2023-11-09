@@ -35,4 +35,4 @@ const ResultSchema = new Schema({
   },
 });
 
-module.exports = mongoose.model("results", ResultSchema);
+module.exports = mongoose.model("Result", ResultSchema);

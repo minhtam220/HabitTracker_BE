@@ -32,4 +32,4 @@ const UserSchema = new Schema({
 
 // Export the mongoose model for the User schema.
 // The model is named "users" and corresponds to a MongoDB collection.
-module.exports = mongoose.model("users", UserSchema);
+module.exports = mongoose.model("User", UserSchema);

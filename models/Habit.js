@@ -16,6 +16,12 @@ const HabitSchema = new Schema({
     ref: "User",
     required: true,
   },
+  completions: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Completion",
+    },
+  ],
 });
 
-module.exports = mongoose.model("habits", HabitSchema);
+module.exports = mongoose.model("Habit", HabitSchema);

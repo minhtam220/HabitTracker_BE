@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const Instruction = require("../models/Instruction"); // Assuming you have a model named Instruction
 
+// returns all instructions using verifyToken middleware
+
 // Get all instructions
 router.get("/", async (req, res) => {
   const { stage, day } = req.body;

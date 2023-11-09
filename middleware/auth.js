@@ -25,8 +25,8 @@ const verifyToken = (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
-    req.body.userId = decoded.userId;
-    //console.log(req.body.userId);
+    req.userId = decoded.userId;
+    console.log(req.body.userId);
     next();
   } catch (error) {
     console.log(error);
@@ -34,7 +34,7 @@ const verifyToken = (req, res, next) => {
       // Token has expired
       return res.status(401).json({
         success: false,
-        message: "Your session has expired. Please log in again.",
+        message: "Access token is expired. Please log in again.",
       });
     } else {
       // Other JWT validation errors

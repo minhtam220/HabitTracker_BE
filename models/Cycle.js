@@ -38,4 +38,4 @@ const CycleSchema = new Schema({
   },
 });
 
-module.exports = mongoose.model("cycles", CycleSchema);
+module.exports = mongoose.model("Cycle", CycleSchema);
