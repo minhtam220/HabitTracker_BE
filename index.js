@@ -11,6 +11,9 @@ const authRouter = require("./routes/auth");
 // Import the habit router module from the 'habit' file in the 'routes' directory.
 const habitRouter = require("./routes/habit");
 
+// Import the result router module from the 'result' file in the 'routes' directory.
+const resultRouter = require("./routes/result");
+
 // Import the instruction router module from the 'instruction' file in the 'routes' directory.
 const instructionRouter = require("./routes/instruction");
 
@@ -70,6 +73,9 @@ app.use("/api/auth", authRouter);
 
 // Define routes for habit
 app.use("/api/habits", habitRouter);
+
+// Define routes for habit
+app.use("/api/results", resultRouter);
 
 // Define routes for instruction
 app.use("/api/instructions", instructionRouter);

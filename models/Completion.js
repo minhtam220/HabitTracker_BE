@@ -102,6 +102,7 @@ async function calculateSingleResult(doc, start_date, given_date) {
       totalCompletions: count,
       totalDopamines: 0,
       currentStreak: 0,
+      user: doc.user,
     });
 
     await newResult.save();
