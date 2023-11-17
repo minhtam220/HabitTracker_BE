@@ -18,8 +18,14 @@ const HabitSchema = new Schema({
   },
   completions: [
     {
-      type: mongoose.Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: "Completion",
+    },
+  ],
+  results: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Result",
     },
   ],
 });

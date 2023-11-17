@@ -16,11 +16,6 @@ const ResultSchema = new Schema({
     enum: ["analyse", "build", "check"],
     required: true,
   },
-  habit: {
-    type: Schema.Types.ObjectId,
-    ref: "Habit",
-    required: true,
-  },
   totalCompletions: {
     type: Number,
     required: true,
@@ -36,6 +31,11 @@ const ResultSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
     ref: "User",
+    required: true,
+  },
+  habit: {
+    type: Schema.Types.ObjectId,
+    ref: "Habit",
     required: true,
   },
 });

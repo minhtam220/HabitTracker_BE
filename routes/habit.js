@@ -27,18 +27,47 @@ router.get("/me", verifyToken, async (req, res) => {
 
   const userId = req.userId;
 
-  const habits = await Habit.find({ user: userId }).populate("completions");
-  //.populate("Completion");
-
-  console.log("running get habits");
-  //console.log(Habit.find({ user: userId }).populate("Completion"));
-  //console.log(habits);
+  const habits = await Habit.find({ user: userId })
+    .populate("completions")
+    .populate("results");
 
   res.json({
     success: true,
     message: "Habits retrieved successfully",
     data: {
       habits: habits,
+    },
+  });
+});
+
+//@route GET api/habits/:id
+//@desc Get a habit by its ID
+//access private
+router.get("/:id", verifyToken, async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  const userId = req.userId;
+  const habitId = req.params.id;
+
+  const habit = await Habit.findOne({ _id: habitId, user: userId })
+    .populate("completions")
+    .populate("results");
+
+  if (!habit) {
+    return res.status(404).json({
+      success: false,
+      message: "Habit not found",
+    });
+  }
+
+  res.json({
+    success: true,
+    message: "Habit retrieved successfully",
+    data: {
+      habit: habit,
     },
   });
 });
@@ -64,7 +93,7 @@ router.post(
 
     const newHabit = new Habit({
       description: capitalizeFirstLetter(description),
-      type,
+      type: type ? type : "good",
       user: userId,
     });
 
@@ -153,9 +182,34 @@ router.delete("/:id", verifyToken, async (req, res) => {
   });
 });
 
+//@route GET api/habits/:id/completions
+//@desc Get all completions of a habit by its ID
+//access private
+router.get("/:id/completions", verifyToken, async (req, res) => {
+  const habitId = req.params.id;
+  const userId = req.userId;
+
+  const habit = await Habit.findOne({ _id: habitId, user: userId });
+
+  if (!habit) {
+    return res.status(404).json({
+      success: false,
+      message: "Habit not found",
+    });
+  }
+
+  const completions = await Completion.find({ habit: habitId });
+
+  res.json({
+    success: true,
+    message: "Completions retrieved successfully",
+    data: completions,
+  });
+});
+
 // Track a habit on a specific day
 router.put(
-  "/:id/track",
+  "/:id/completions",
   verifyToken,
   //add validation for completion_date and complete
   [
@@ -167,20 +221,23 @@ router.put(
   ],
   async (req, res) => {
     const habitId = req.params.id;
-    const { completion_date, complete } = req.body;
+
+    let completion_date = new Date(req.body.completion_date);
+    completion_date.setUTCHours(7, 0, 0, 0); // set the time to 00:00:00.000
+
+    const today = new Date();
+    today.setUTCHours(7, 0, 0, 0); // set the time to 00:00:00.000
+
+    const complete = req.body.complete;
     const userId = req.userId;
 
     //find the result
-    let completion = await Completion.findOne({
-      completion_date: completion_date,
+    let foundCompletion = await Completion.findOne({
+      completion_date: completion_date.setUTCHours(7, 0, 0, 0),
       habit: habitId,
     });
 
-    console.log("running track habit");
-    console.log("completion_date");
-    console.log(completion_date);
-
-    if (completion) {
+    if (foundCompletion) {
       // If there's an existing entry, update it
       let updatedCompletion = {
         complete: complete,
@@ -203,12 +260,6 @@ router.put(
         data: updatedCompletion,
       });
     } else {
-      let completion_date = new Date(req.body.completion_date);
-      completion_date.setUTCHours(7, 0, 0, 0); // set the time to 00:00:00.000
-
-      const today = new Date();
-      today.setUTCHours(7, 0, 0, 0); // set the time to 00:00:00.000
-
       console.log("running track habit");
       console.log("completion_date");
       console.log(completion_date);
