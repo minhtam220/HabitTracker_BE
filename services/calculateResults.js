@@ -13,6 +13,10 @@ async function calculateResults(habitId, start_date, end_date) {
     });
   }
 
+  //declare inception_date
+  inception_date = new Date("2023-01-01");
+  inception_date.setUTCHours(7, 0, 0, 0); // set the time to 00:00:00.000
+
   //declare start_date
   start_date = new Date(start_date);
   start_date.setUTCHours(7, 0, 0, 0); // set the time to 00:00:00.000
@@ -41,9 +45,11 @@ async function calculateResults(habitId, start_date, end_date) {
     console.log("----------------------");
     */
 
+    //for this, we use the inception_date as the start_date
+
     const { current_streak } = await calculateStreak(
       habitId,
-      start_date,
+      inception_date,
       current_date
     );
 
@@ -125,6 +131,13 @@ async function calculateDopamines(habitId, start_date, current_date) {
 async function calculateStreak(habitId, start_date, current_date) {
   //calculate the streak from start date to current date
   //calculate the streaks from start date to end date
+
+  //find the current_streak result
+  let result = await Result.findOne({
+    result_date: current_date,
+    habit: habitId,
+  });
+
   let current_streak = 0;
 
   // Get the completions sorted by completion_date
